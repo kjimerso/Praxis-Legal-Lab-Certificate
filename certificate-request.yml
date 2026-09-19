@@ -1,0 +1,33 @@
+name: Certificate Request
+description: Request a new Praxis Legal Lab certificate be issued and published.
+title: "[Certificate] "
+labels: ["certificate-request"]
+body:
+  - type: input
+    id: student_name
+    attributes:
+      label: Student name
+      placeholder: Alexandra Rivera
+    validations:
+      required: true
+  - type: input
+    id: deliverable_name
+    attributes:
+      label: Deliverable / credential name
+      placeholder: Housing Policy Research Fellowship
+    validations:
+      required: true
+  - type: input
+    id: program_note
+    attributes:
+      label: Program note (optional)
+      placeholder: Thriving City Initiative — Praxis Legal Lab
+    validations:
+      required: false
+  - type: input
+    id: issue_month
+    attributes:
+      label: Issue month (YYYY-MM)
+      placeholder: "2026-09"
+    validations:
+      required: true
