@@ -46,6 +46,7 @@ for (const rec of records) {
     .split('{{PROGRAM_NOTE}}').join(escapeHtml(rec.programNote || ''))
     .split('{{ISSUE_MONTH_LABEL}}').join(escapeHtml(monthLabel(rec.issueDate)))
     .split('{{CERT_ID}}').join(escapeHtml(rec.certId))
+    .split('{{VERIFY_URL}}').join(escapeHtml(verifyUrl))
     .split('{{LINKEDIN_URL}}').join(linkedInUrl);
 
   fs.writeFileSync(path.join(outDir, `${rec.certId}.html`), html);

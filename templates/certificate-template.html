@@ -4,48 +4,129 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{STUDENT_NAME}} — Praxis Legal Lab Certificate</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <style>
-  body { margin:0; background:#FBF7EE; color:#0B1E3A; font-family:'Cormorant Garamond',Georgia,serif;
-         display:flex; justify-content:center; padding:40px 16px; }
-  .card { max-width:560px; width:100%; background:#fff; border:2px solid #C9A961; border-radius:16px;
-          padding:40px 32px; text-align:center; }
-  .eyebrow { font-size:12px; letter-spacing:3px; color:#B87333; text-transform:uppercase; }
-  .lab { font-family:'Playfair Display',serif; font-weight:700; font-size:22px; letter-spacing:3px; margin:8px 0 22px; }
-  .name { font-family:'Playfair Display',serif; font-weight:600; font-size:32px; margin:6px 0; }
-  .deliv { font-family:'Playfair Display',serif; font-weight:600; font-size:20px; margin:4px 0; }
-  .note { font-style:italic; color:#B87333; font-size:15px; margin-bottom:4px; }
-  .date { font-size:14px; color:#5A5346; margin:14px 0 22px; }
-  .signers { display:flex; justify-content:center; gap:40px; margin:20px 0 8px; flex-wrap:wrap; }
-  .signer { font-size:13px; color:#5A5346; }
-  .signer b { display:block; color:#0B1E3A; font-size:14px; }
-  .signer img { display:block; height:40px; margin:0 auto 2px; }
-  a.li-btn { display:inline-block; margin-top:18px; background:#0A66C2; color:#fff; text-decoration:none;
-             font-family:system-ui,sans-serif; font-weight:600; font-size:15px; padding:11px 20px; border-radius:8px; }
-  .certid { font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#8A8272; margin-top:18px; }
+  body { margin:0; background:#EFE9DA; color:#0B1E3A; font-family:'Cormorant Garamond',Georgia,serif;
+         display:flex; justify-content:center; padding:32px 16px; }
+  .frame-wrap { position:relative; width:100%; max-width:1000px; aspect-ratio:1056/816;
+                background:#FBF7EE; border-radius:6px; box-shadow:0 12px 34px rgba(11,30,58,0.18);
+                overflow:hidden; }
+  .border-outer { position:absolute; inset:2.5%; border:3px solid #C9A961; }
+  .border-inner { position:absolute; inset:3.4%; border:1px solid #0B1E3A; }
+  .corner { position:absolute; width:11px; height:11px; background:#C9A961; transform:translate(-50%,-50%) rotate(45deg); }
+  .skyline { position:absolute; left:3.4%; right:3.4%; bottom:4%; height:5.6%; display:flex; align-items:flex-end;
+             gap:0.7%; opacity:0.05; }
+  .skyline div { background:#0B1E3A; }
+  .content { position:absolute; left:6.3%; right:6.3%; top:6.6%; bottom:5.4%; display:flex; flex-direction:column; align-items:center; }
+  .top-block { display:flex; flex-direction:column; align-items:center; gap:0.9%; }
+  .eyebrow { font-size:1.15%; font-size:clamp(9px,1.2vw,13px); letter-spacing:3px; color:#B87333; text-transform:uppercase; }
+  .wordmark { font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(15px,2.5vw,26px); letter-spacing:5px; color:#0B1E3A; }
+  .divider { display:flex; align-items:center; gap:10px; width:28%; }
+  .divider .line { flex:1; height:1px; background:#C9A961; }
+  .divider .dot { width:6px; height:6px; background:#C9A961; transform:rotate(45deg); }
+  .headline { font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(20px,3.6vw,37px);
+              letter-spacing:3px; color:#0B1E3A; text-transform:uppercase; margin-top:4px; }
+  .lede { font-style:italic; font-size:clamp(12px,1.6vw,17px); color:#5A5346; margin-top:4px; }
+  .student-name { font-family:'Playfair Display',serif; font-weight:600; font-size:clamp(22px,4vw,39px);
+                  color:#0B1E3A; border-bottom:2px solid #C9A961; padding:0 12px 8px; min-width:44%;
+                  text-align:center; margin-top:2px; }
+  .deliverable { font-family:'Playfair Display',serif; font-weight:600; font-size:clamp(16px,2.4vw,23px);
+                 color:#0B1E3A; text-align:center; max-width:70%; margin-top:2px; }
+  .program-note { font-style:italic; font-size:clamp(11px,1.5vw,15px); color:#B87333; margin-top:2px; }
+  .issue-date { font-size:clamp(10px,1.3vw,13px); letter-spacing:0.5px; color:#5A5346; margin-top:8px; }
+  .spacer { flex:1; }
+  .sig-row { width:100%; display:flex; align-items:flex-end; justify-content:space-between; }
+  .sig-col { display:flex; flex-direction:column; align-items:center; width:32%; }
+  .sig-col img.sig { width:60%; max-width:190px; height:auto; display:block; margin-bottom:-6%; }
+  .sig-line { width:78%; border-top:1px solid #0B1E3A; margin-top:2px; }
+  .sig-name { font-size:clamp(11px,1.4vw,13.5px); font-weight:600; margin-top:6px; color:#0B1E3A; }
+  .sig-title { font-size:clamp(9px,1.2vw,11.5px); color:#5A5346; letter-spacing:0.3px; text-align:center; }
+  .seal { width:16%; aspect-ratio:1; border-radius:50%; border:6px double #C9A961; background:#FBF7EE;
+          display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .seal svg { width:32%; height:auto; }
+  .seal .seal-text { font-size:clamp(7px,0.9vw,9px); letter-spacing:1.5px; color:#0B1E3A; margin-top:4%; }
+  .footer-row { width:100%; display:flex; align-items:center; justify-content:space-between; margin-top:2.2%; }
+  .footer-text { font-size:clamp(8px,1vw,10.5px); color:#8A8272; letter-spacing:0.3px; }
+  .li-btn { display:inline-block; margin-top:2.2%; background:#0A66C2; color:#fff; text-decoration:none;
+            font-family:system-ui,sans-serif; font-weight:600; font-size:clamp(12px,1.5vw,15px);
+            padding:10px 20px; border-radius:8px; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="eyebrow">UAB Urban Solutions Collaborative</div>
-    <div class="lab">PRAXIS LEGAL LAB</div>
-    <div style="font-size:13px;color:#5A5346;">This certifies that</div>
-    <div class="name">{{STUDENT_NAME}}</div>
-    <div style="font-style:italic;color:#5A5346;font-size:14px;">has successfully completed the requirements of</div>
-    <div class="deliv">{{DELIVERABLE_NAME}}</div>
-    <div class="note">{{PROGRAM_NOTE}}</div>
-    <div class="date">Issued {{ISSUE_MONTH_LABEL}}</div>
-    <div class="signers">
-      <div class="signer">
-        <img src="../assets/kevron-signature.png" alt="Signature of Kevron Jimerson Jr.">
-        <b>Kevron Jimerson Jr.</b>Lab Manager, Praxis Legal Lab
-      </div>
-      <div class="signer">
-        <b>Brandon L. Blankenship, J.D.</b>Assistant Professor &amp; Director, Pre-Law Program
-      </div>
+  <div class="frame-wrap">
+    <div class="skyline">
+      <div style="width:5%;height:44%;"></div><div style="width:3%;height:74%;"></div>
+      <div style="width:5.5%;height:30%;"></div><div style="width:3.5%;height:96%;"></div>
+      <div style="width:4.5%;height:52%;"></div><div style="width:6%;height:82%;"></div>
+      <div style="width:3%;height:40%;"></div><div style="width:5%;height:65%;"></div>
+      <div style="width:4%;height:35%;"></div><div style="width:6%;height:88%;"></div>
+      <div style="width:3%;height:48%;"></div><div style="width:4.5%;height:74%;"></div>
+      <div style="width:3.5%;height:40%;"></div><div style="width:5%;height:61%;"></div>
+      <div style="width:4%;height:44%;"></div>
     </div>
-    <a class="li-btn" href="{{LINKEDIN_URL}}" target="_blank" rel="noopener">Add to LinkedIn Profile</a>
-    <div class="certid">Certificate ID: {{CERT_ID}}</div>
+    <div class="border-outer"></div>
+    <div class="border-inner"></div>
+    <div class="corner" style="left:2.5%;top:2.5%;"></div>
+    <div class="corner" style="left:97.5%;top:2.5%;"></div>
+    <div class="corner" style="left:2.5%;top:97.5%;"></div>
+    <div class="corner" style="left:97.5%;top:97.5%;"></div>
+
+    <div class="content">
+      <div class="top-block">
+        <div class="eyebrow">UAB Urban Solutions Collaborative</div>
+        <svg viewBox="0 0 64 60" width="34" height="34" fill="none" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="32" cy="6" r="2.6" fill="#C9A961" stroke="none"/>
+          <line x1="32" y1="8" x2="32" y2="46"/>
+          <line x1="12" y1="14" x2="52" y2="14"/>
+          <path d="M12 14 L6 28 A6 6 0 0 0 18 28 Z"/>
+          <path d="M52 14 L46 28 A6 6 0 0 0 58 28 Z"/>
+          <line x1="18" y1="50" x2="46" y2="50"/>
+          <line x1="32" y1="46" x2="32" y2="50"/>
+        </svg>
+        <div class="wordmark">PRAXIS LEGAL LAB</div>
+        <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+        <div class="headline">Certificate of Completion</div>
+        <div class="lede">This certifies that</div>
+        <div class="student-name">{{STUDENT_NAME}}</div>
+        <div class="lede">has successfully completed the requirements of</div>
+        <div class="deliverable">{{DELIVERABLE_NAME}}</div>
+        <div class="program-note">{{PROGRAM_NOTE}}</div>
+        <div class="issue-date">Issued {{ISSUE_MONTH_LABEL}}</div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="sig-row">
+        <div class="sig-col">
+          <img class="sig" src="../assets/kevron-signature.png" alt="Signature of Kevron Jimerson Jr.">
+          <div class="sig-line"></div>
+          <div class="sig-name">Kevron Jimerson Jr.</div>
+          <div class="sig-title">Lab Manager, Praxis Legal Lab</div>
+        </div>
+        <div class="seal">
+          <svg viewBox="0 0 64 60" fill="none" stroke="#0B1E3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="32" y1="8" x2="32" y2="46"/>
+            <line x1="12" y1="14" x2="52" y2="14"/>
+            <path d="M12 14 L6 28 A6 6 0 0 0 18 28 Z"/>
+            <path d="M52 14 L46 28 A6 6 0 0 0 58 28 Z"/>
+            <line x1="18" y1="50" x2="46" y2="50"/>
+            <line x1="32" y1="46" x2="32" y2="50"/>
+          </svg>
+          <div class="seal-text">P · L · L</div>
+        </div>
+        <div class="sig-col">
+          <div class="sig-line" style="margin-top:0;"></div>
+          <div class="sig-name">Brandon L. Blankenship, J.D.</div>
+          <div class="sig-title">Assistant Professor &amp; Director, Pre-Law Program</div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-text">Certificate ID: {{CERT_ID}}</div>
+        <div class="footer-text">Verify at {{VERIFY_URL}}</div>
+      </div>
+      <a class="li-btn" href="{{LINKEDIN_URL}}" target="_blank" rel="noopener">Add to LinkedIn Profile</a>
+    </div>
   </div>
 </body>
 </html>
